@@ -1,7 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Fredoka', sans-serif;;
+}
+
+.btn-login{
+    background-color: #0295f6;
+    border-color: #0295f6;
+    color: white;
+}
+
+.btn-login:hover{
+    opacity: 0.8;
+    color: white;
+}
+
+.logo{
+    font-family: 'Pacifico', cursive;
 }

@@ -1,3 +1,4 @@
+from ensurepip import bootstrap
 from pathlib import Path
 import os 
 from dotenv import load_dotenv
@@ -28,7 +29,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gram_app',
+    'crispy_forms',
+    'bootstrap4'
+
 ]
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,0 +1,86 @@
+{%extends 'base.html' %}
+{%load static%}
+{%block body%}
+{%if page == 'login'%}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img class='img-fluid' src="{%static 'assets/login.jpg'%}" alt="login page image">
+        </div>
+        <div class="col-md-6">
+            <div class="pt-5 mt-5">
+                <form action="" class="form-control p-5" method="POST">
+                    {%csrf_token%}
+
+                    {% if messages %}
+                    <p class="messages text-center">
+                        {% for message in messages %}
+                    <p> {{ message }} </p>
+                    {% endfor %}
+                    </p>
+                    {% endif %}
+
+                    <p class="text-center fs-3 logo">Gram</p>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Username</label>
+                        <input type="username" name="username" class="form-control" id="username"
+                            placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" id="password"
+                            placeholder="name@example.com">
+                    </div>
+                    <input type="submit" value="Login" class="btn btn-login">
+                    <div class="mb-3">
+                        <p class="text-center">-------OR------</p>
+                        <a href="">Login with Google</a>
+                    </div>
+                </form>
+            </div>
+            <div class="pt-2">
+                <p class="form-control ps-5 pt-3 pb-3 pe-5">
+                    Dont have an account?  <a href="{%url 'register' %}">Signup</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
+
+{%if page == 'register'%}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img class='img-fluid' src="{%static 'assets/register.jpg'%}" alt="register page image">
+        </div>
+        <div class="col-md-6">
+            <div class="pt-5 mt-5">
+                <form action="" class="form-control p-5" method="POST">
+                    {%csrf_token%}
+                
+                    {% if messages %}
+                        <p class="messages text-center">
+                            {% for message in messages %}
+                        <p> {{ message }} </p>
+                            {% endfor %}
+                        </p>
+                    {% endif %}
+                
+                    <p class="text-center fs-3 logo">Gram</p>
+                    {{form}}
+                    <input type="submit" value="Signup" class="btn btn-login">
+                    <br>
+                    <p class="text-center text-secondary pt-3">
+                        <small>
+                            By signing up, you agree to our <a href="">Terms</a>, <a href="">Data Policy</a> and <a href="">Cookies Policy.</a>
+                        </small>
+                      
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
+{%endblock%}
