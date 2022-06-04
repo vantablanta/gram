@@ -159,3 +159,10 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+
+EMAIL_USE_TLS=True
+EMAIL_HOST=str(os.getenv('EMAIL_HOST'))
+EMAIL_PORT=int(os.getenv('EMAIL_PORT'))
+EMAIL_HOST_USER=str(os.getenv('EMAIL_HOST_USER'))
+EMAIL_HOST_PASSWORD=str(os.getenv('EMAIL_HOST_PASSWORD'))
