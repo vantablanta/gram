@@ -10,6 +10,7 @@ psycopg2 = "*"
 autopep8 = "*"
 django-crispy-forms = "*"
 django-bootstrap4 = "*"
+django-allauth = "*"
 
 [dev-packages]
 
