@@ -5,6 +5,7 @@
     <div class="main mt-5">
         <div class="row">
             <div class="col-md-1"></div>
+
             <div class="col-md-8">
                 {%for image in images %}
                 <div class="card mb-3">
@@ -57,7 +58,17 @@
                 </div>
                 {%endfor%}
             </div>
-            <div class="col-md-3"></div>
+
+            <!-- PROFILE SECTION -->
+            {%for image in images %}
+            <div class="col-md-3">
+                <a href="{%url 'profile'%}">
+                    <img src="{{profile_info.profile_photo.url}}" class="prof-img rounded-circle" alt="Image">
+                </a>
+            {{profile_info.name}}
+                
+            </div>
+            {%endfor%}
         </div>
 
     </div>

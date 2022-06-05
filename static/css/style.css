@@ -41,3 +41,22 @@ textarea {
 .view-comments{
     cursor: pointer;
 }
+
+.prof-img{
+    width: 20%;
+}
+
+.main-profile{
+    width: 100%;
+}
+
+.white{
+    background-color: white !important;
+}
+
+
+@media (max-width:767.98px) {
+    .search-form{
+        display: none !important;
+    }
+}

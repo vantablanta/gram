@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -6,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User 
 from django.contrib import messages
-from gram_app.models import Image, Comment
+from gram_app.models import Image, Comment, Profile
 from .forms import RegisterForm
 from .emails import send_welcome_email
 
@@ -46,6 +45,8 @@ def registerUser(request):
             recipient = User(username = username,email =email)
             send_welcome_email(username,email)
 
+            profile = Profile.objects.create(name =username, owner = user)
+            profile.save()
 
             return HttpResponse('User created')
     context = {'page': page, 'form': form}
@@ -58,13 +59,22 @@ def logoutUser(request):
 @login_required(login_url='')
 def home(request):
     images  = Image.objects.all()
-    context = {'images':images}
+    profile = request.user
+    profile_info = Profile.objects.get(owner=profile)
+    context = {'images':images, 'profile_info':profile_info}
     return render(request, 'gram_app/index.html', context)
 
 @login_required(login_url='')
 def comments(request, pk):
-    image = Image.objects.get(id= pk)
+    image = Image.objects.get(id=pk)
     comments = Comment.objects.get(image = image)
     context = {'comment': comments}
     return render(request, 'gram_app/index.html', context )
 
+@login_required(login_url='')
+def profiles(request):
+    user = request.user
+    profile  = Profile.objects.get(owner=user)
+    images = Image.objects.filter(owner=profile)
+    context = {'profile': profile, 'images': images}
+    return render(request, 'gram_app/profile.html', context)
