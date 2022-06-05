@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -5,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User 
 from django.contrib import messages
+from gram_app.models import Image, Comment
 from .forms import RegisterForm
 from .emails import send_welcome_email
 
@@ -55,7 +57,14 @@ def logoutUser(request):
 
 @login_required(login_url='')
 def home(request):
-    context = {}
+    images  = Image.objects.all()
+    context = {'images':images}
     return render(request, 'gram_app/index.html', context)
 
+@login_required(login_url='')
+def comments(request, pk):
+    image = Image.objects.get(id= pk)
+    comments = Comment.objects.get(image = image)
+    context = {'comment': comments}
+    return render(request, 'gram_app/index.html', context )
 

@@ -2,7 +2,66 @@
 {%block body%}
 {%include 'nav.html' %}
 <div class="container">
-    homepage
+    <div class="main mt-5">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-8">
+                {%for image in images %}
+                <div class="card mb-3">
+                    <div class="card-header bg">
+                        <img src="{{image.owner.profile_photo.url}}" class="profile-img rounded-circle" alt="Image">
+                        <small class="text-bold">{{image.owner |lower}}</small>
+                    </div>
+                    <div class="p-2">
+
+                        <img src="{{image.image.url}}" class="main-img card-img-top" alt="Image">
+                        <h5 class="">{{image.image_likes.total_likes}}</h5>
+                        <p class="">
+                            <strong>{{image.owner |lower}}</strong> &nbsp;{{image.image_caption |lower}}
+                        </p>
+                        <div class="mb-2">
+                            <p data-toggle="modal" data-target="#{{image.id}}" class="text-muted text-decoration-none view-comments">
+                                view comments
+                            </p>
+                        </div>
+
+                        <div class="modal fade" id="{{image.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <small class="modal-title" id="exampleModalLabel">
+                                            <strong>{{image.owner |lower}}</strong>
+                                        </small>
+                                        <a class='text-light' href="{{request.META.HTTP_REFERER}}">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </a>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{comment.comment}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <small class="text-muted">{{image.created |timesince}}</small>
+                        </div>
+                        <div class="card-footer bg mt-3">
+                            <form action="" method="POST">
+                                {%csrf_token%}
+                                <textarea name="comment" id="" type='text' placeholder="leave a comment"></textarea>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+
+    </div>
+
 </div>
 
 
