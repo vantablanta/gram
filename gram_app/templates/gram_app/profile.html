@@ -40,7 +40,12 @@
             <hr>
            <p>Posts: </p>
            {%for image in images %}
-           <img src="{{image.image.url}}" class="w-50 h-50" alt="Image">
+           <div class="row">
+               <div class="col-md-4">
+                    <img src="{{image.image.url}}" class=" img-fluid me-3 mb-3" alt="Image">
+               </div>
+           </div>
+           
            {%endfor%}
 
            
