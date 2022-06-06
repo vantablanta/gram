@@ -61,15 +61,25 @@ def home(request):
     images  = Image.objects.all()
     profile = request.user
     profile_info = Profile.objects.get(owner=profile)
-    context = {'images':images, 'profile_info':profile_info}
+    context = {'images':images, 'profile_info':profile_info, 'comments':comments}
     return render(request, 'gram_app/index.html', context)
 
 @login_required(login_url='')
 def comments(request, pk):
     image = Image.objects.get(id=pk)
-    comments = Comment.objects.get(image = image)
-    context = {'comment': comments}
-    return render(request, 'gram_app/index.html', context )
+    comments = Comment.objects.filter(image = image)
+    context = {'comment': comments, 'image':image} 
+    return render(request, 'gram_app/comments.html', context )
+
+@login_required(login_url='')
+def add_comments(request):
+    if request.method == 'POST':
+        comment  = request.POST.get('comments')
+        if comment:
+            comment = Comment.objects.get(comment = comment)
+            comment.save()
+    context = {} 
+    return render(request, 'gram_app/comments.html', context )
 
 @login_required(login_url='')
 def profiles(request):

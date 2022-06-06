@@ -33,7 +33,7 @@ class Comment(models.Model):
     image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments')
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comments')
     created = models.DateTimeField(auto_now_add=True, null=True)
-
+    
     def __str__(self):
             return self.comment
 
