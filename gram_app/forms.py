@@ -1,9 +1,11 @@
 from cProfile import label
+from dataclasses import fields
+from pyexpat import model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from .models import Comment
+from .models import Comment, Image
 
 
 class RegisterForm(UserCreationForm):
@@ -18,5 +20,12 @@ class RegisterForm(UserCreationForm):
 
           
 
-
-            
+class AddImageForm(ModelForm):
+    class Meta():
+        model=Image
+        fields=['image', 'image_name', 'image_caption']
+        widgets = {
+            'image': forms.FileInput(attrs={'class':'form-control  mb-3'}),
+            'image_name': forms.TextInput(attrs={'class':'form-control mb-3'}),
+            'image_caption': forms.Textarea(attrs={'class':'form-control mb-3'})
+        }

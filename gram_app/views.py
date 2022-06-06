@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User 
 from django.contrib import messages
 from gram_app.models import Image, Comment, Profile
-from .forms import RegisterForm
+from .forms import RegisterForm, AddImageForm
 from .emails import send_welcome_email
 
 def loginUser(request):
@@ -61,8 +61,25 @@ def home(request):
     images  = Image.objects.all()
     profile = request.user
     profile_info = Profile.objects.get(owner=profile)
-    context = {'images':images, 'profile_info':profile_info, 'comments':comments}
+    context = {'images':images, 'profile_info':profile_info,}
     return render(request, 'gram_app/index.html', context)
+
+@login_required(login_url='')
+def upload_images(request):
+    form = AddImageForm()
+    user = request.user
+    owner = Profile.objects.get(owner = user)
+    if request.method == 'POST':
+        form = AddImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.cleaned_data['image']
+            image_name = form.cleaned_data['image_name']
+            image_caption = form.cleaned_data['image_caption']
+            upload = Image(image=image, image_name=image_name, image_caption=image_caption, owner=owner)         
+            upload.save()
+            return redirect('home')
+    context={'form': form}
+    return render(request, 'gram_app/upload.html', context)
 
 @login_required(login_url='')
 def comments(request, pk):
@@ -86,3 +103,8 @@ def profiles(request):
     images = Image.objects.filter(owner=profile)
     context = {'profile': profile, 'images': images}
     return render(request, 'gram_app/profile.html', context)
+
+def update_profile(request):
+    context = {}
+    return render(request, 'gram_app/update.html', context)
+

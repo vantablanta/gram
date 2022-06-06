@@ -61,5 +61,9 @@ textarea{
 @media (max-width:767.98px) {
     .search-form{
         display: none !important;
+
+    }
+    #home-profile{
+        display: none !important;
     }
 }
