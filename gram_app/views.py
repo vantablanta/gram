@@ -1,13 +1,12 @@
-from email.mime import image
+
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User 
 from django.contrib import messages
 from gram_app.models import Image, Comment, Profile
-from .forms import RegisterForm, AddImageForm
+from .forms import RegisterForm, AddImageForm, UpdateImageForm
 from .emails import send_welcome_email
 
 def loginUser(request):
@@ -84,12 +83,27 @@ def upload_images(request):
     context={'form': form}
     return render(request, 'gram_app/upload.html', context)
 
+@login_required(login_url='')
 def delete_image(request, pk ):
     image = Image.objects.get(id = pk)
     if request.method == "POST":
         image.delete()
         return redirect('home')
     return render(request, 'gram_app/delete.html', {'obj': image})
+
+@login_required(login_url='')
+def update_image(request, pk):
+    image = Image.objects.get(id=pk)
+    form =UpdateImageForm(request.POST or None, instance=image)
+    if request.method == 'POST':
+        if form.is_valid():
+                form.instance.owner = request.user.profile
+                form.instance.image = image.image
+                form.instance.image_name = image.image_name
+                form.save()
+                return redirect('home')
+    context = {'form':form}
+    return render(request, 'gram_app/update.html', context)
 
 @login_required(login_url='')
 def comments(request, pk):

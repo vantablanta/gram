@@ -26,3 +26,11 @@ class AddImageForm(ModelForm):
             'image_name': forms.TextInput(attrs={'class':'form-control mb-3'}),
             'image_caption': forms.Textarea(attrs={'class':'form-control mb-3'})
         }
+
+class UpdateImageForm(ModelForm):
+    class Meta():
+        model=Image
+        fields=['image_caption']
+        widgets = {
+            'image_caption': forms.Textarea(attrs={'class':'form-control mb-3'})
+        }
