@@ -10,8 +10,7 @@ urlpatterns = [
     
     path('home/', views.home, name='home'),
     path('profile/', views.profiles, name='profile'),
-    path('comments/<str:pk>', views.comments, name='comments'),
-    path('add_comments/<str:pk>', views.add_comments, name='add_comments'),
+    path('comments/<str:pk>', views.comments, name='comments')
 ]
 
 if settings.DEBUG:

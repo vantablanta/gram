@@ -23,10 +23,11 @@
                
                 <hr style="width:96%">
                 {% for comment in image.comments.all %}
-                <div class="comment">
+                <div class="comment ">
                     <div class="ml-2">
-                        <strong>{{ comment.owner}}</strong> 
-                        <span class="text-muted">{{ comment.comment }}</span>
+                        <strong>{{ comment.owner | lower}}</strong> 
+
+                        <span class="">{{ comment.comment |capfirst}}</span>
                         <p>
                             <small><span class="text-muted">{{ comment.created | timesince }}</span></small>
                         </p>
@@ -50,7 +51,7 @@
                         </div>
                     </form>
                 </div>
-                
+
             </div>
             <div class="col-md-1"></div>
         </div>

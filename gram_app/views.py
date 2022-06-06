@@ -68,18 +68,15 @@ def home(request):
 def comments(request, pk):
     image = Image.objects.get(id=pk)
     comments = Comment.objects.filter(image = image)
-    context = {'comment': comments, 'image':image} 
-    return render(request, 'gram_app/comments.html', context )
 
-@login_required(login_url='')
-def add_comments(request, pk):
-    image = get_object_or_404(Image, id=pk)
     if request.method == 'POST':
-        comment  = request.POST.get('comments')
+        comment  = request.POST.get('comment')
         print(comment)
-        new_comment = Comment.objects.create(comment= comment, image=image, owner = request.user)
+        comment_owner = Profile.objects.get(owner = request.user)
+        new_comment = Comment.objects.create(comment= comment, image=image, owner = comment_owner)
         new_comment.save()
-    context = {} 
+
+    context = {'comment': comments, 'image':image} 
     return render(request, 'gram_app/comments.html', context )
 
 @login_required(login_url='')
