@@ -1,4 +1,5 @@
-from django.urls import path 
+from django.urls import path
+from requests import delete 
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -10,6 +11,8 @@ urlpatterns = [
 
     path('home/', views.home, name='home'),
     path('upload/', views.upload_images, name='upload'),
+    path('delete/<str:pk>', views.delete_image, name='delete'),
+
     path('profile/', views.profiles, name='profile'),
     path('comments/<str:pk>', views.comments, name='comments')
 ]

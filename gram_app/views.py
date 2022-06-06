@@ -1,3 +1,4 @@
+from email.mime import image
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -82,6 +83,13 @@ def upload_images(request):
 
     context={'form': form}
     return render(request, 'gram_app/upload.html', context)
+
+def delete_image(request, pk ):
+    image = Image.objects.get(id = pk)
+    if request.method == "POST":
+        image.delete()
+        return redirect('home')
+    return render(request, 'gram_app/delete.html', {'obj': image})
 
 @login_required(login_url='')
 def comments(request, pk):
