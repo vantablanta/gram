@@ -30,15 +30,14 @@
                         <p>
                             <small><span class="text-muted">{{ comment.created | timesince }}</span></small>
                         </p>
-                       
                     </div>
                 </div>
                 {% empty %}
                 <p class="ml-3">Be the first to comment</p>
                 {% endfor %}
                 <hr style="width:96%; margin-top:84%;">
+
                 <div id="">
-                    <i class="fas fa-home"></i>
                     <form action="" method="POST">
                         {%csrf_token%}
                         <div class="row">
@@ -46,14 +45,12 @@
                                 <textarea name="comment" id="" cols="30" rows="10" placeholder="comment"></textarea> 
                             </div>
                             <div class="col-md-4">
-                                <input class='btn' type="submit" value="Post">
+                                <input class='btn blue' type="submit" value="Post">
                             </div>
                         </div>
-
                     </form>
-                   
-                    
                 </div>
+                
             </div>
             <div class="col-md-1"></div>
         </div>
