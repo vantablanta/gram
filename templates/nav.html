@@ -8,9 +8,8 @@
                 </button>
  
 
-
-            <form class="d-flex ps-5 pe-5 ms-5 me-5 w-50 search-form">
-                <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+            <form class="d-flex ps-5 pe-5 ms-5 me-5 w-50 search-form" method="GET" action="{%url 'search' %}">
+                <input name="q" class="form-control me-2" type="text" placeholder="start search ..." aria-label="Search">
             </form>
 
             <div class="collapse navbar-collapse ps-5 pe-5 ms-5 me-5" id="navbarSupportedContent">

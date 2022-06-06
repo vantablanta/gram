@@ -26,3 +26,8 @@ class ImageTest(TestCase):
         images = Image.objects.all()
         self.assertTrue(len(images) == 0 )
 
+    def test_update_caption(self):
+        self.new_image.save_image()
+        self.new_image.update_caption()
+        
+
