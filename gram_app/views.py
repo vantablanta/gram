@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User 
 from django.contrib import messages
 from gram_app.models import Image, Comment, Profile
-from .forms import RegisterForm, AddImageForm, UpdateImageForm
+from .forms import RegisterForm, AddImageForm, UpdateImageForm, UpdateProfileForm
 from .emails import send_welcome_email
 
 def loginUser(request):
@@ -128,7 +128,13 @@ def profiles(request):
     context = {'profile': profile, 'images': images}
     return render(request, 'gram_app/profile.html', context)
 
-def update_profile(request):
-    context = {}
+def update_profile(request, pk):
+    profile= Profile.objects.get(id=pk)
+    form =UpdateProfileForm(request.POST, instance=profile)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    context = {'form':form}
     return render(request, 'gram_app/update.html', context)
-
+    

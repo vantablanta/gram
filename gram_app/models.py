@@ -32,7 +32,10 @@ class Image(models.Model):
         return self.delete()
 
 
-    # update_caption()
+    def update_caption(self, pk):
+        image_caption =self.objects.get(image_caption=pk)
+        return image_caption.save()
+
 
     class Meta:
         ordering = ['-created']

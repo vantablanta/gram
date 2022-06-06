@@ -16,7 +16,9 @@
                             <div class="row">
                                 <h2 class="col-md-4">{{profile.name}}</h2>
                                 <div class="col-md-4"></div>
-                                <button type="button" class="col-md-4 btn btn-outline-dark">Edit</button>
+                                <button type="button" class="col-md-4 btn btn-outline-dark">
+                                    <a href="{%url 'update-profile' profile.id%}" class="text-decoration-none">Edit</a>
+                                </button>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 mt-3 mb-3">

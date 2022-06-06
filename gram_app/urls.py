@@ -15,6 +15,7 @@ urlpatterns = [
     path('update/<str:pk>', views.update_image, name='update'),
 
     path('profile/', views.profiles, name='profile'),
+    path('update_profile/<str:pk>', views.update_profile, name='update-profile'),
     path('comments/<str:pk>', views.comments, name='comments')
 ]
 
