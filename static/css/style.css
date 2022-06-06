@@ -58,6 +58,12 @@ textarea{
     color: #0295f6 !important;
 }
 
+
+.dropdown-toggle::after {
+    content: none !important;
+    display: none !important;
+}
+
 @media (max-width:767.98px) {
     .search-form{
         display: none !important;

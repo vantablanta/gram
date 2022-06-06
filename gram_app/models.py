@@ -25,6 +25,15 @@ class Image(models.Model):
     def number_of_likes(self):
         return self.likes.count()
 
+    def save_image(self):
+        return self.save()
+
+    def delete_image(self):
+        return self.delete()
+
+
+    # update_caption()
+
     class Meta:
         ordering = ['-created']
 

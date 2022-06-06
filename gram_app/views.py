@@ -48,7 +48,8 @@ def registerUser(request):
             profile = Profile.objects.create(name =username, owner = user)
             profile.save()
 
-            return HttpResponse('User created')
+            return render(request, 'gram_app/register-success.html' )
+
     context = {'page': page, 'form': form}
     return render(request, 'gram_app/login-register.html',context )
 
@@ -78,6 +79,7 @@ def upload_images(request):
             upload = Image(image=image, image_name=image_name, image_caption=image_caption, owner=owner)         
             upload.save()
             return redirect('home')
+
     context={'form': form}
     return render(request, 'gram_app/upload.html', context)
 
