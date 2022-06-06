@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -72,12 +72,13 @@ def comments(request, pk):
     return render(request, 'gram_app/comments.html', context )
 
 @login_required(login_url='')
-def add_comments(request):
+def add_comments(request, pk):
+    image = get_object_or_404(Image, id=pk)
     if request.method == 'POST':
         comment  = request.POST.get('comments')
-        if comment:
-            comment = Comment.objects.get(comment = comment)
-            comment.save()
+        print(comment)
+        new_comment = Comment.objects.create(comment= comment, image=image, owner = request.user)
+        new_comment.save()
     context = {} 
     return render(request, 'gram_app/comments.html', context )
 

@@ -12,6 +12,7 @@ django-crispy-forms = "*"
 django-bootstrap4 = "*"
 django-allauth = "*"
 pillow = "*"
+django-static-fontawesome = "*"
 
 [dev-packages]
 

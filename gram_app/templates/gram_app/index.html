@@ -1,4 +1,5 @@
 {%extends 'base.html' %}
+
 {%block body%}
 {%include 'nav.html' %}
 <div class="container">
@@ -34,7 +35,7 @@
                         <div class="card-footer bg mt-3">
                             <form action="" method="POST">
                                 {%csrf_token%}
-                                <textarea name="comment" id="comment" type='text' placeholder="leave a comment"></textarea>
+                                <textarea name="comments" id="comment" type='text' placeholder="leave a comment"></textarea>
                                 <input type="submit" value='post' name="" id="" class="btn">
                             </form>
                         </div>
@@ -45,7 +46,7 @@
             </div>
 
             <!-- PROFILE SECTION -->
-            {%for image in images %}
+
             <div class="col-md-3">
                 <a href="{%url 'profile'%}">
                     <img src="{{profile_info.profile_photo.url}}" class="prof-img rounded-circle" alt="Image">
@@ -53,7 +54,7 @@
             {{profile_info.name}}
                 
             </div>
-            {%endfor%}
+
         </div>
 
     </div>
