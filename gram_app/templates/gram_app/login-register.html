@@ -25,19 +25,18 @@
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Username</label>
                         <input type="username" name="username" class="form-control" id="username"
-                            placeholder="name@example.com">
+                            placeholder="name">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" id="password"
-                            placeholder="name@example.com">
+                        <input type="password" name="password" class="form-control" id="password">
                     </div>
                     <div class="row mt-2 mb-3">
                         <div class="col-md-6">
                             <input type="submit" value="Login" class="btn btn-login">
                         </div>
                         <div class="col-md-6 pt-2">
-                            <a href=""> Forgot your password? </a>
+                            <a class="text-decoration-none" href=""> Forgot your password? </a>
                            
                         </div>
                         
@@ -46,14 +45,14 @@
                     
                     <div class="mb-3">
                         <hr class="mt-3">
-                        <a href="{%provider_login_url 'google'%}">Login with Google</a>
+                        <a  class="text-decoration-none" href="{%provider_login_url 'google'%}">Login with Google</a>
                     </div>
 
                 </form>
             </div>
             <div class="pt-2">
                 <p class="form-control ps-5 pt-3 pb-3 pe-5">
-                    Dont have an account?  <a href="{%url 'register' %}">Signup</a>
+                    Dont have an account?  <a href="{%url 'register' %}" class="text-decoration-none">Signup</a>
                 </p>
             </div>
         </div>
@@ -86,13 +85,15 @@
                     <br>
                     <p class="text-center text-secondary pt-3">
                         <small>
-                            By signing up, you agree to our <a href="">Terms</a>, <a href="">Data Policy</a> and <a href="">Cookies Policy.</a>
+                            By signing up, you agree to our <a class="text-decoration-none"href="">Terms</a>, 
+                            <a class="text-decoration-none" href="">Data Policy</a> and 
+                            <a class="text-decoration-none" href="">Cookies Policy.</a>
                         </small> 
                     </p>
                 </form>
                 <div class="pt-2">
                     <p class="form-control ps-5 pt-3 pb-3 pe-5">
-                        Already have an account?  <a href="{%url 'login' %}">Login</a>
+                        Already have an account?  <a class="text-decoration-none" href="{%url 'login' %}">Login</a>
                     </p>
                 </div>
             </div>

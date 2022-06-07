@@ -67,7 +67,10 @@ def home(request):
     images = Image.objects.all()
     profile = request.user
     profile_info = Profile.objects.get(owner=profile)
-    context = {'images': images, 'profile_info': profile_info, }
+
+    profiles = Profile.objects.all()
+
+    context = {'images': images, 'profile_info': profile_info, 'profiles':profiles}
     return render(request, 'gram_app/index.html', context)
 
 

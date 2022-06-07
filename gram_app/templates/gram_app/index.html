@@ -99,9 +99,23 @@
                     <img src="{{profile_info.profile_photo.url}}" class="prof-img rounded-circle" alt="Image">
                 </a>
                 {{profile_info.name}}  
-            </div>
 
-        </div>
+                <div>
+                    <hr class="mt-5">
+                    <div >
+                        <h3>Suggestions: </h3>
+                        {%for profile in profiles%} 
+                        <div class="mt-5">
+                           
+                                {{profile.name}} 
+                                <li class="list-unstyled"><a class='text-decoration-none' href="{%url 'follow' profile.owner.id%}">Follow</a></li>
+                            {%endfor%}
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+       </div>
 
     </div>
 
