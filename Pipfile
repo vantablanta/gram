@@ -13,6 +13,10 @@ django-bootstrap4 = "*"
 django-allauth = "*"
 pillow = "*"
 fontawesomefree = "*"
+gunicorn = "*"
+whitenoise = "*"
+django-heroku = "*"
+dj-database-url = "*"
 
 [dev-packages]
 

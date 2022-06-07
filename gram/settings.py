@@ -1,7 +1,11 @@
 from pathlib import Path
 import os 
 from dotenv import load_dotenv
+import django_heroku
+import dj_database_url
+
 env_path= Path('.')/'.env'
+
 load_dotenv(dotenv_path=env_path)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,8 +18,8 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+MODE = 'dev'
+ALLOWED_HOSTS = ['gram-mn.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -75,17 +80,26 @@ WSGI_APPLICATION = 'gram.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': str(os.getenv('NAME')),
-        'USER': str(os.getenv('USER')),
-        'PASSWORD': str(os.getenv('PASSWORD')),
-        'HOST': str(os.getenv('HOST')),
-        'PORT': int(os.getenv('PORT')),       
+if MODE == 'dev':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': str(os.getenv('NAME')),
+            'USER': str(os.getenv('USER')),
+            'PASSWORD': str(os.getenv('PASSWORD')),
+            'HOST': str(os.getenv('HOST')),
+            'PORT': int(os.getenv('PORT')),       
+        }
     }
-}
+else:
+    DATABASES = {
+       'default': dj_database_url.config(
+           default=str(os.getenv('DATABASE_URL'))
+       )
+    }
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -112,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -123,9 +137,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -167,3 +181,6 @@ EMAIL_HOST=str(os.getenv('EMAIL_HOST'))
 EMAIL_PORT=int(os.getenv('EMAIL_PORT'))
 EMAIL_HOST_USER=str(os.getenv('EMAIL_HOST_USER'))
 EMAIL_HOST_PASSWORD=str(os.getenv('EMAIL_HOST_PASSWORD'))
+
+
+django_heroku.settings(locals())
