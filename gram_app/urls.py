@@ -19,6 +19,8 @@ urlpatterns = [
     path('comments/<str:pk>', views.comments, name='comments'),
 
     path('like/<str:pk>', views.like, name='likes'),
+    path('follow/<str:pk>', views.follow, name='follow'),
+    path('unfollow/<str:pk>', views.follow, name='unfollow'),
 ]
 
 if settings.DEBUG:

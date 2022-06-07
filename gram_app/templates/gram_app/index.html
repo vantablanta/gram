@@ -40,9 +40,9 @@
                                 </div>
                                 
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="">Follow</a></li>
+                                    <li><a class="dropdown-item" href="{%url 'follow' image.owner.id%}">Follow</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="">Unfollow</a></li>
+                                    <li><a class="dropdown-item" href="{%url 'unfollow' image.owner.id%}">Unfollow</a></li>
                                 </ul>
                             </div>                         
                         </div>

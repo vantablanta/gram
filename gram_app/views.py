@@ -11,7 +11,6 @@ from gram_app.models import Follow, Image, Comment, Profile, Likes
 from .forms import RegisterForm, AddImageForm, UpdateImageForm, UpdateProfileForm
 from .emails import send_welcome_email
 
-
 def loginUser(request):
     page = 'login'
     if request.method == 'POST':
@@ -158,6 +157,7 @@ def profiles(request):
     context = {'profile': profile, 'images': images, 'following_count':following_count,'followers_count':followers_count,}
     return render(request, 'gram_app/profile.html', context)
 
+
 def update_profile(request, pk):
     profile = Profile.objects.get(id=pk)
     form = UpdateProfileForm(request.POST, instance=profile)
@@ -188,3 +188,27 @@ def like(request, pk):
     image.save()
 
     return HttpResponseRedirect(reverse('home'))
+
+
+def unfollow(request, pk):
+    if request.method == 'GET':
+        try:
+            user_profile2 = User.objects.get(username=pk)
+        except User.DoesNotExist:
+            user_profile2 = None
+
+        unfollow_d = Follow.objects.filter(follower=request.user, following=user_profile2)
+        unfollow_d.delete()
+        return redirect('profile')
+
+
+def follow(request, pk):
+    if request.method == 'GET':
+        try:
+            user_profile3 = User.objects.get(username=pk)
+        except User.DoesNotExist:
+            user_profile3 = None
+
+        follow_s = Follow(follower=request.user, following=user_profile3)
+        follow_s.save()
+        return redirect('profile')
