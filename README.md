@@ -49,8 +49,6 @@ python manage.py makemigrations gram_app
 * username - 
 * password -  
 
-
-
 ##### Run the application  
  ```bash 
  python manage.py runserver 

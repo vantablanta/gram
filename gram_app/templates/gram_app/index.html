@@ -31,7 +31,7 @@
                                 </ul>
                             </div>                         
                         </div>
-                                {%endif%}
+                        {%endif%}
                     </div>
 
                     <img src="{{image.image.url}}" class="main-img card-img-top" alt="Image">
@@ -39,14 +39,17 @@
                     <div class="p-3">
                         <div class="row mt-3">
                             <div class="col-sm-1">
-                                <i class="fa-regular fa-heart fs-4"></i>
+                                <a href="{%url 'likes' image.id%}">
+                                    <i class="fa-regular fa-heart fs-4"></i>
+                                </a>
                             </div>
-                            <div class="col-sm-1">
-                                
-                                <i class="fa-regular fa-comment fs-4">
-                                    <a href="{%url 'comments' image.id%}"></a>
-                                </i>                       
+
+                            <div class="col-sm-1">                            
+                                <a href="{%url 'comments' image.id%}">
+                                    <i class="fa-regular fa-comment fs-4"></i>  
+                                </a>
                             </div>
+
                             <div class="col-md-10"></div>
                         </div>
 

@@ -16,7 +16,7 @@ class Image(models.Model):
     image = models.ImageField( upload_to='photos/', height_field=None, width_field=None, max_length=100)
     image_name = models.CharField(max_length=200)
     image_caption = models.TextField(blank=True)
-    likes = models.ManyToManyField(User, related_name='likes', blank=True, )
+    likes = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True, null=True)
     
     def __str__(self):
@@ -31,11 +31,9 @@ class Image(models.Model):
     def delete_image(self):
         return self.delete()
 
-
     def update_caption(self, pk):
         image_caption =self.objects.get(image_caption=pk)
         return image_caption.save()
-
 
     class Meta:
         ordering = ['-created']
@@ -48,6 +46,20 @@ class Comment(models.Model):
     
     def __str__(self):
             return self.comment
+
+class Likes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_like')
+    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='post_like')
+
+    def user_liked_post(sender, instance, *args, **kwargs):
+            like = instance
+            post = like.post
+            sender = like.user
+
+    def user_unlike_post(sender, instance, *args, **kwargs):
+            like = instance
+            post = like.post
+            sender = like.user
 
 class Follow(models.Model):
     follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='following')

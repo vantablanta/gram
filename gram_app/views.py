@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -5,7 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib import messages
-from gram_app.models import Image, Comment, Profile
+from django.urls import reverse
+from gram_app.models import Image, Comment, Profile, Likes
 from .forms import RegisterForm, AddImageForm, UpdateImageForm, UpdateProfileForm
 from .emails import send_welcome_email
 
@@ -69,7 +71,6 @@ def home(request):
     context = {'images': images, 'profile_info': profile_info, }
     return render(request, 'gram_app/index.html', context)
 
-
 @login_required(login_url='')
 def search(request):
     query = request.GET.get('q')
@@ -82,8 +83,6 @@ def search(request):
         context = {'images': images}
         return render(request, 'gram_app/search.html', context)
         
-
-
 @login_required(login_url='')
 def upload_images(request):
     form = AddImageForm()
@@ -103,7 +102,6 @@ def upload_images(request):
     context = {'form': form}
     return render(request, 'gram_app/upload.html', context)
 
-
 @login_required(login_url='')
 def delete_image(request, pk):
     image = Image.objects.get(id=pk)
@@ -111,7 +109,6 @@ def delete_image(request, pk):
         image.delete()
         return redirect('home')
     return render(request, 'gram_app/delete.html', {'obj': image})
-
 
 @login_required(login_url='')
 def update_image(request, pk):
@@ -126,7 +123,6 @@ def update_image(request, pk):
             return redirect('home')
     context = {'form': form}
     return render(request, 'gram_app/update.html', context)
-
 
 @login_required(login_url='')
 def comments(request, pk):
@@ -144,7 +140,6 @@ def comments(request, pk):
     context = {'comment': comments, 'image': image}
     return render(request, 'gram_app/comments.html', context)
 
-
 @login_required(login_url='')
 def profiles(request):
     user = request.user
@@ -152,7 +147,6 @@ def profiles(request):
     images = Image.objects.filter(owner=profile)
     context = {'profile': profile, 'images': images}
     return render(request, 'gram_app/profile.html', context)
-
 
 def update_profile(request, pk):
     profile = Profile.objects.get(id=pk)
@@ -163,3 +157,23 @@ def update_profile(request, pk):
             return redirect('profile')
     context = {'form': form}
     return render(request, 'gram_app/update.html', context)
+
+
+def like(request, pk):
+        user = request.user
+        image = Image.objects.get(id=pk)
+        current_likes = image.likes
+        liked = Likes.objects.filter(user=user, image=image).count()
+
+        if not liked:
+            like = Likes.objects.create(user=user, image=image)
+            current_likes = current_likes + 1
+
+        else:
+            Likes.objects.filter(user=user, image=image).delete()
+            current_likes = current_likes - 1
+
+        image.likes = current_likes
+        image.save()
+
+        return HttpResponseRedirect(reverse('home'))
