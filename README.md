@@ -35,7 +35,7 @@ pipenv shell
  ```bash 
  pipenv sync
 ```  
- ##### Setup Database  
+##### Setup Database  
   SetUp your database User,Password, Host then make migrate  
  ```bash 
 python manage.py makemigrations gram_app
@@ -44,8 +44,7 @@ python manage.py makemigrations gram_app
  ```bash 
  python manage.py migrate 
 ```
-## Super User Credentials 
-  
+##### Super User Credentials 
 * username - 
 * password -  
 
