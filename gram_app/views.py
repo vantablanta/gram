@@ -166,6 +166,7 @@ def like(request, pk):
         liked = Likes.objects.filter(user=user, image=image).count()
 
         if not liked:
+            class_name = 'red'
             like = Likes.objects.create(user=user, image=image)
             current_likes = current_likes + 1
 

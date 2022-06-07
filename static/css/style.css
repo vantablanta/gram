@@ -64,6 +64,10 @@ textarea{
     display: none !important;
 }
 
+.red{
+    color: rgba(208, 15, 15, 0.844);
+}
+
 @media (max-width:767.98px) {
     .search-form{
         display: none !important;
