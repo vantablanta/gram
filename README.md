@@ -5,7 +5,7 @@
 >An application where a user can sign into it, upload pictures, see their profile with all pictures they uploaded. Follow other users and see their pictures. Like a picture and leave a comment on it.
 
 ##  Live Link  
->[View Site]()  to visit the site
+>[View Site](https://gram-mn.herokuapp.com)  to visit the site
   
 
 ## User Story  
@@ -45,8 +45,8 @@ python manage.py makemigrations gram_app
  python manage.py migrate 
 ```
 ##### Super User Credentials 
-* username - 
-* password -  
+* username - FithKilonzi
+* password -  FaithKilonzi
 
 ##### Run the application  
  ```bash 
