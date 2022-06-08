@@ -4,7 +4,7 @@ from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Profile(models.Model):
-    profile_photo = models.ImageField(upload_to='profile/', default='profile/default.png')
+    profile_photo = CloudinaryField("image")
     bio = models.CharField(max_length=300)
     owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     name = models.CharField(blank=True, max_length=200)

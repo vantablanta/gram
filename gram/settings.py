@@ -94,9 +94,7 @@ if MODE == 'dev':
     }
 else:
     DATABASES = {
-       'default': dj_database_url.config(
-           default=str(os.getenv('DATABASE_URL'))
-       )
+       'default': dj_database_url.config( default=str(os.getenv('DATABASE_URL')))
     }
 
 db_from_env = dj_database_url.config()
@@ -177,11 +175,11 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 
-EMAIL_USE_TLS=True
-EMAIL_HOST=str(os.getenv('EMAIL_HOST'))
-EMAIL_PORT=int(os.getenv('EMAIL_PORT'))
-EMAIL_HOST_USER=str(os.getenv('EMAIL_HOST_USER'))
-EMAIL_HOST_PASSWORD=str(os.getenv('EMAIL_HOST_PASSWORD'))
+EMAIL_USE_TLS = True
+EMAIL_HOST= str(os.getenv('EMAIL_HOST'))
+EMAIL_PORT= int(os.getenv('EMAIL_PORT'))
+EMAIL_HOST_USER= str(os.getenv('EMAIL_HOST_USER'))
+EMAIL_HOST_PASSWORD= str(os.getenv('EMAIL_HOST_PASSWORD'))
 
 
 cloudinary.config ( 
