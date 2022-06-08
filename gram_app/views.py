@@ -140,8 +140,7 @@ def comments(request, pk):
         comment = request.POST.get('comment')
         print(comment)
         comment_owner = Profile.objects.get(owner=request.user)
-        new_comment = Comment.objects.create(
-            comment=comment, image=image, owner=comment_owner)
+        new_comment = Comment.objects.create(comment=comment, image=image, owner=comment_owner)
         new_comment.save()
 
     context = {'comment': comments, 'image': image}

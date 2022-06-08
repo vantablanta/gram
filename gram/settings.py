@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 import django_heroku
 import dj_database_url
+import cloudinary
 
 env_path= Path('.')/'.env'
 
@@ -181,6 +182,13 @@ EMAIL_HOST=str(os.getenv('EMAIL_HOST'))
 EMAIL_PORT=int(os.getenv('EMAIL_PORT'))
 EMAIL_HOST_USER=str(os.getenv('EMAIL_HOST_USER'))
 EMAIL_HOST_PASSWORD=str(os.getenv('EMAIL_HOST_PASSWORD'))
+
+
+cloudinary.config ( 
+  cloud_name = str(os.getenv('CLOUD_NAME')),
+  api_key = str(os.getenv('API_KEY')), 
+  api_secret = str(os.getenv('API_SECRET')),
+)
 
 
 django_heroku.settings(locals())
