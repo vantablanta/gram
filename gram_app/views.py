@@ -138,7 +138,6 @@ def comments(request, pk):
 
     if request.method == 'POST':
         comment = request.POST.get('comment')
-        print(comment)
         comment_owner = Profile.objects.get(owner=request.user)
         new_comment = Comment.objects.create(comment=comment, image=image, owner=comment_owner)
         new_comment.save()
@@ -195,11 +194,11 @@ def like(request, pk):
 def unfollow(request, pk):
     if request.method == 'GET':
         try:
-            user_profile2 = User.objects.get(username=pk)
+            user_profile = User.objects.get(username=pk)
         except User.DoesNotExist:
-            user_profile2 = None
+            user_profile = None
 
-        unfollow_d = Follow.objects.filter(follower=request.user, following=user_profile2)
+        unfollow_d = Follow.objects.filter(follower=request.user, following=user_profile)
         unfollow_d.delete()
         return redirect('profile')
 
@@ -207,10 +206,10 @@ def unfollow(request, pk):
 def follow(request, pk):
     if request.method == 'GET':
         try:
-            user_profile3 = User.objects.get(username=pk)
+            user_profile = User.objects.get(username=pk)
         except User.DoesNotExist:
-            user_profile3 = None
+            user_profile = None
 
-        follow_s = Follow(follower=request.user, following=user_profile3)
+        follow_s = Follow(follower=request.user, following=user_profile)
         follow_s.save()
         return redirect('profile')
